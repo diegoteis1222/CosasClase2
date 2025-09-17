@@ -19,6 +19,11 @@ public class TestInetAddress {
             dir = InetAddress.getByName("www.google.es");
             pruebaMetodos(dir);
 
+            // URL www.cebem.net
+            System.out.println("=== SALIDA PARA UNA URL: ");
+            dir = InetAddress.getByName("www.cebem.net");
+            pruebaMetodos(dir);
+
             // Array de direcciones IP para google.es
             System.out.println("\tDIRECCIONES IP PARA: " + dir.getHostName());
             InetAddress[] direcciones = InetAddress.getAllByName(dir.getHostName());
