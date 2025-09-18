@@ -13,5 +13,9 @@ public class Test {
         int[][] C = Util.sumMatrices(A, B);
         System.out.println("Suma de A y B:");
         Util.print2DArray(C);
+
+        int[][] D = Util.restaMatrices(A, B);
+        System.out.println("Resta de A y B:");
+        Util.print2DArray(D);
     }
 }
