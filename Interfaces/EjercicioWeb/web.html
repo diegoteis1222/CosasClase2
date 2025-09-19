@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 60vh;
+            flex-direction: column;
+        }
+
+        #resultado {
+            margin-top: 20px;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        input {
+            margin: 5px;
+            padding: 10px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 12%;
+        }
+
+        button:hover {
+            background-color: orangered;
+        }
+
+        div#resultado {
+            color: orangered;
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="container">
+        <h1>Calculadora de Mierda</h1>
+        
+        <input type"number" id="numero1" placeholder="Ingrese un numero">
+        <input type="number" id="numero2" placeholder="Ingrese otro numero">
+
+        <button id="btnCalcular">Calcular</button>
+
+        <div id="resultado">AAAAAAAAAAAAAAAH</div>
+
+    </main>
+
+    <script>
+        document.getElementById('btnCalcular').addEventListener('click', function() {
+            const num1 = parseFloat(document.getElementById('numero1').value);
+            const num2 = parseFloat(document.getElementById('numero2').value);
+            if (isNaN(num1) || isNaN(num2)) {
+                document.getElementById('resultado').textContent = 'Por favor, ingrese números válidos.';
+                return;
+            }
+            const suma = num1 + num2;
+            document.getElementById('resultado').textContent = 'Resultado: ' + suma + " AAAAAAAAAAAAAAAAH";
+        });
+    </script>
+</body>
+
+</html>

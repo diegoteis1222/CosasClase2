@@ -1,0 +1,19 @@
+FROM python:3.11-slim
+
+# Crear directorio
+WORKDIR /app
+
+# Copiar dependencias necesitadas
+COPY requirements.txt .
+
+# Instalar las putas dependecias
+RUN pip install --no-cache-dir requirements.txt
+
+# Copiar esta carpeta al contenedor
+COPY . .
+
+# El puto puerto
+EXPOSE 5000
+
+# Pa ejecutar
+CMD ["python","servidor.py"]
