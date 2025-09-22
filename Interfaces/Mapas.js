@@ -23,3 +23,25 @@ console.log(mapa.size); // 2
 
 // Elimina todos los elementos del mapa
 mapa.clear();
+
+// Se crea un Map vacío llamado "studiantes"
+const studiantes = new Map();
+
+// Se agregan elementos al Map usando .set(clave, valor)
+studiantes.set("david", 2); // clave: "david", valor: 2
+studiantes.set("ana", 9); // clave: "ana", valor: 9
+
+// Recorre todas las CLAVES del Map
+for (let key of studiantes.keys()) {
+  console.log(key); // Muestra: "david", luego "ana"
+}
+
+// Recorre todos los VALORES del Map
+for (let value of studiantes.values()) {
+  console.log(value); // Muestra: 2, luego 9
+}
+
+// Recorre el Map completo (clave y valor)
+for (let [key, value] of studiantes.entries()) {
+  console.log(key, value); // Muestra: "david 2", luego "ana 9"
+}
