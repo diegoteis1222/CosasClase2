@@ -86,3 +86,35 @@ let maquinaCafe = {
 };
 
 maquinaCafe.hacerCafe();
+
+class Cuadrado {
+  constructor(lado) {
+    this.lado = lado;
+  }
+  getArea() {
+    return this.lado * this.lado;
+  }
+}
+
+class Rectangulo extends Cuadrado {
+  constructor(lado1, lado2) {
+    super(lado1);
+    this.lado2 = lado2;
+  }
+  getArea() {
+    return this.lado * this.lado2;
+  }
+}
+
+let miRect = new Rectangulo(5, 10);
+console.log(miRect.getArea());
+
+class Habitante {
+  constructor(nombre) {
+    this.nombre = nombre;
+  }
+  static get contadorHabitantes() {}
+}
+
+
+

@@ -71,4 +71,41 @@ public class Util {
         }
         return C;
     }
+
+    public static int[][] transposeMatrix(int[][] A) {
+        int rows = A.length;
+        int cols = A[0].length;
+        int[][] transpose = new int[cols][rows];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                transpose[j][i] = A[i][j];
+            }
+        }
+        return transpose;
+    }
+
+    public static boolean areMatricesEqual(int[][] A, int[][] B) {
+        if (A.length != B.length || A[0].length != B[0].length) {
+            return false;
+        }
+        for (int i = 0; i < A.length; i++) {
+            for (int j = 0; j < A[0].length; j++) {
+                if (A[i][j] != B[i][j]) {
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public static boolean isSquareMatrix(int[][] A) {
+        return A.length == A[0].length;
+    }
+
+    public static boolean esSimetrica(int[][] A) {
+        if (!isSquareMatrix(A)) {
+            return false;
+        }
+        return areMatricesEqual(A, transposeMatrix(A));
+    }
 }
