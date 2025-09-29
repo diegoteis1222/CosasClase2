@@ -1,18 +1,18 @@
 public class Mamifero {
 
-    String especio, color;
+    String especie, color;
 
     public Mamifero(String especio, String color) {
-        this.especio = especio;
+        this.especie = especio;
         this.color = color;
     }
 
-    public String getEspecio() {
-        return especio;
+    public String getEspecie() {
+        return especie;
     }
 
-    public void setEspecio(String especio) {
-        this.especio = especio;
+    public void setEspecie(String especio) {
+        this.especie = especio;
     }
 
     public String getColor() {
@@ -25,7 +25,7 @@ public class Mamifero {
 
     @Override
     public String toString() {
-        return "Mamifero [especio=" + especio + ", color=" + color + "]";
+        return "Mamifero [especio=" + especie + ", color=" + color + "]";
     }
 
     public void caminar() {

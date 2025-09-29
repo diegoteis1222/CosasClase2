@@ -6,7 +6,7 @@ public class gato extends Mamifero implements PuedeNadar, PuedeCaminar {
 
     @Override
     public String toString() {
-        return "gato [especie=" + especio + ", color=" + color + "]";
+        return "gato [especie=" + especie + ", color=" + color + "]";
     }
 
     @Override

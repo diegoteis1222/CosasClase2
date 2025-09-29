@@ -1,4 +1,5 @@
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -15,11 +16,30 @@ public class ServerChat {
 
         Socket cliente = servidor.accept();
         System.out.println("Se conectó alguien");
-        DataInputStream in = new DataInputStream(cliente.getInputStream());
-        String msg = in.readUTF();
-        System.out.println("Mensaje recibido: " + msg);
 
-        servidor.close();
+        boolean conexion = true;
+
+        do {
+            try {
+
+                DataInputStream in = new DataInputStream(cliente.getInputStream());
+                String msg = in.readUTF();
+                System.out.println("Mensaje recibido: " + msg);
+
+                DataOutputStream out = new DataOutputStream(cliente.getOutputStream());
+                out.writeUTF("Hola desde el server");
+
+                if (msg.equalsIgnoreCase("exit")) {
+                    conexion = false;
+                }
+
+            } catch (IOException e) {
+
+                System.out.println("El cliente se ha desconectado");
+            }
+        } while (conexion);
+
+        // servidor.close();
 
     }
 

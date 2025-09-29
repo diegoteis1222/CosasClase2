@@ -6,7 +6,7 @@ public class loro extends Mamifero implements PuedeCaminar {
 
     @Override
     public String toString() {
-        return "loro [especie=" + especio + ", color=" + color + "]";
+        return "loro [especie=" + especie + ", color=" + color + "]";
     }
 
     @Override

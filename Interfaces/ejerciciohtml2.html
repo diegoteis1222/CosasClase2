@@ -1,0 +1,48 @@
+// usando https://wttr.in/vigo?format=1
+
+// hacer una app web que permita escribir la localizacion en una caja de texto y muestre la temperatura media para hoy,
+mañana y pasado
+// usando then y async/await
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EjercicioHTML</title>
+</head>
+
+<body>
+    <button id="btn"> Obtener temperatura</button>
+    <div id="output"></div>
+    <script>
+
+        const url_base = 'https://wttr.in/vigo?format=1'
+        const TOTAL_POKEMONS = 1025
+        const getRandomNum = () => Math.floor(Math.random() * TOTAL_POKEMONS) + 1
+
+        async function getTemperatura(id) {
+            const response = await fetch(url_base + id)
+            return await response.json()
+        }
+
+        document.getElementById('btn').addEventListener('click', async () => {
+            document.getElementById('output').innerHTML = ''
+
+            const ids = Array.from({ length: 5 }, getRandomNum)
+
+            const promesas = ids.map(id => getTemperatura(id))
+            const pokemons = await Promise.all(promesas)
+
+            pokemons.forEach(pokemon => {
+                document.getElementById('output').innerHTML += `
+                            <h2>${pokemon.name}</h2>
+                            <img src="${pokemon.sprites.front_default}"/>
+                    `
+            })
+        })
+    </script>
+</body>
+
+</html>
