@@ -29,9 +29,16 @@ public class ClienteChat {
                 String envio = scanner.nextLine();
                 out.writeUTF(envio);
 
+                try {
+                    int numero = Integer.parseInt(envio);
+                esPerfecto(numero);
+                } catch (Exception e) {
+                    System.out.println("Error: Solo puedes meter numeros");
+                }
+
                 DataInputStream in = new DataInputStream(cliente.getInputStream());
                 String msg = in.readUTF();
-                System.out.println("Mensaje recivido: " + msg);
+                System.out.println("Mensaje recivido: " + ecoMayus(msg));
                 System.out.println("--------------------------------------------------");
 
                 if (envio.equalsIgnoreCase("exit")) {
@@ -43,5 +50,23 @@ public class ClienteChat {
             e.printStackTrace();
         }
 
+    }
+
+    public static void esPerfecto(int numero) {
+        int suma = 0;
+        for (int i = 1; i < numero; i++) {
+            if (numero % i == 0) {
+                suma += i;
+            }
+        }
+        if (suma == numero) {
+            System.out.println(numero + " es un número perfecto.");
+        } else {
+            System.out.println(numero + " no es un número perfecto.");
+        }
+    }
+
+    public static String ecoMayus(String llega) {
+        return llega.toUpperCase();
     }
 }
