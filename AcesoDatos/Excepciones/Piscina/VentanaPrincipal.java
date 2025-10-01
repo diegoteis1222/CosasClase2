@@ -2,16 +2,17 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JSlider;
 import javax.swing.JTextArea;
+import javax.swing.JSpinner;
+import javax.swing.SpinnerListModel;
 
 public class VentanaPrincipal extends JFrame {
 
-    private JComboBox<Double> comboCapacidad;
+    private JSpinner spinnerCapacidad;
     private JButton btnProbar, btnLlenar, btnVaciar;
     private JSlider sliderNivel;
     private JTextArea txtArea;
@@ -27,24 +28,25 @@ public class VentanaPrincipal extends JFrame {
         setLayout(new FlowLayout());
 
         // Etiqueta
-        JLabel lblCapacidad = new JLabel("Capacidad de la Piscina en metros cúbicos:");
+        JLabel lblCapacidad = new JLabel("Capacidad de la **** Piscina en m3:");
         lblCapacidad.setForeground(Color.RED);
         add(lblCapacidad);
 
-        // ComboBox de capacidades
-        Double[] capacidades = {1.0, 1.1, 1.2, 1.3, 1.4, 1.5};
-        comboCapacidad = new JComboBox<>(capacidades);
-        comboCapacidad.addActionListener(e -> {
-            capacidadSeleccionada = (double) comboCapacidad.getSelectedItem();
+        // Spinner de capacidades (en vez de ComboBox)
+        Double[] capacidades = { 1.0, 1.1, 1.2, 1.3, 1.4, 1.5 };
+        SpinnerListModel model = new SpinnerListModel(capacidades);
+        spinnerCapacidad = new JSpinner(model);
+
+        spinnerCapacidad.addChangeListener(e -> {
+            capacidadSeleccionada = (double) spinnerCapacidad.getValue();
+            sliderNivel.setMaximum((int) (capacidadSeleccionada * 1000)); // ajustar máximo
             actualizarTexto();
         });
-        add(comboCapacidad);
+        add(spinnerCapacidad);
 
-        // Botón probar
         btnProbar = new JButton("Probar Piscina");
         add(btnProbar);
 
-        // Botón llenar
         btnLlenar = new JButton("Llenar");
         btnLlenar.setBackground(Color.GREEN);
         btnLlenar.addActionListener(e -> llenarPiscina());
@@ -57,7 +59,7 @@ public class VentanaPrincipal extends JFrame {
         add(btnVaciar);
 
         // Slider
-        sliderNivel = new JSlider(0, 1300, 0); // suponiendo 1.3 m³ = 1300 litros
+        sliderNivel = new JSlider(0, (int)(capacidadSeleccionada * 1000), 0);
         sliderNivel.setPaintTicks(true);
         sliderNivel.setPaintLabels(true);
         sliderNivel.setMajorTickSpacing(100);
@@ -97,4 +99,8 @@ public class VentanaPrincipal extends JFrame {
         txtArea.setText("Piscina: " + nivelActual + " / " + (int) (capacidadSeleccionada * 1000) + " litros");
     }
 
+    // Main para ejecutar
+    public static void main(String[] args) {
+        new VentanaPrincipal().setVisible(true);
+    }
 }

@@ -24,4 +24,12 @@ class Piscina {
         }
         nivel += cantidad;
     }
+
+    public void vaciarTodo() {
+        nivel = 0;
+    }
+
+    public void llenarTodo() {
+        nivel = MAX_NIVEL;
+    }
 }
