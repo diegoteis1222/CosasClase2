@@ -2,7 +2,7 @@
 
 let arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
-// Muestra el primer elemento del array 
+// Muestra el primer elemento del array
 console.log(arr[0]); // 1
 
 // Muestra la cantidad de elementos que tiene el array
@@ -29,7 +29,7 @@ arr.join("-");
 
 // Convierte el string '1-2-3-4-5-6-7-8-9-10' en un array separando por guiones
 let mewArr = "1-2-3-4-5-6-7-8-9-10".split("-");
-console.log(mewArr); 
+console.log(mewArr);
 
 // Agrega el número 11 al final del array
 arr.push(11);
@@ -55,3 +55,8 @@ console.log(arr);
 // OJO: slice NO modifica el array original
 arr.slice(0, 5);
 console.log(arr); // arr sigue igual que antes
+
+// reverse
+
+arr.reverse();
+console.log(arr);
