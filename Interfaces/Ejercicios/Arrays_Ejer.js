@@ -25,7 +25,7 @@ let array = [
 console.log(array[0]); // 1
 
 // Ejecuta la función esPositivo que está en la posición 10 del array, pasándole el número 5
-console.log(array ); // true
+console.log(array); // true
 
 // Accede al objeto que está en la posición 11 del array y muestra su propiedad 'nombre'
 console.log(array[11].nombre); // "cosa1"

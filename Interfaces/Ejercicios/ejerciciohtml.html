@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <button id="btn">Obtener pokemon (async/await)</button>
+    <div id="output"></div>
+    <script>
+
+        // URL base de la API de Pokémon
+        const url_base = 'https://pokeapi.co/api/v2/pokemon/';
+
+        // Total de Pokémon disponibles en la API
+        const TOTAL_POKEMONS = 1025;
+
+        // Función para generar un número aleatorio entre 1 y TOTAL_POKEMONS
+        const getRandomNum = () => Math.floor(Math.random() * TOTAL_POKEMONS) + 1;
+
+        // Función asíncrona para obtener datos de un Pokémon por su ID
+        async function getPokemon(id) {
+            // Espera a que fetch obtenga la respuesta de la API
+            const response = await fetch(url_base + id);
+            // Convierte la respuesta a JSON y la devuelve
+            return await response.json();
+        }
+
+        // Evento 'click' del botón con id 'btn'
+        document.getElementById('btn').addEventListener('click', async () => {
+
+            // Limpiamos el div de salida antes de mostrar nuevos Pokémon
+            document.getElementById('output').innerHTML = '';
+
+            // Creamos un array con 5 números aleatorios (IDs de Pokémon)
+            const ids = Array.from({ length: 5 }, getRandomNum);
+
+            // Creamos un array de promesas llamando getPokemon para cada ID
+            const promesas = ids.map(id => getPokemon(id));
+
+            // Esperamos a que todas las promesas se resuelvan
+            const pokemons = await Promise.all(promesas);
+
+            // Recorremos cada Pokémon y lo mostramos en el div 'output'
+            pokemons.forEach(pokemon => {
+                document.getElementById('output').innerHTML += `
+            <h2>${pokemon.name}</h2>
+            <img src="${pokemon.sprites.front_default}"/>
+        `;
+            });
+        });
+
+    </script>
+</body>
+
+</html>

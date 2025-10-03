@@ -110,42 +110,76 @@
   </div>
 
   <script>
+    // ======================
+    // Función para obtener el valor de una cookie por su nombre
+    // ======================
     function getCookie(name) {
+      // Separamos todas las cookies del documento en un array
       const cookies = document.cookie.split('; ');
+
+      // Recorremos cada cookie
       for (let cookie of cookies) {
+        // Separamos nombre y valor
         const [key, value] = cookie.split('=');
+
+        // Si el nombre coincide, devolvemos el valor decodificado
         if (key === name) {
           return decodeURIComponent(value);
         }
-      } return null;
+      }
+
+      // Si no encontramos la cookie, devolvemos null
+      return null;
     }
 
-    const input = document.getElementById('texto');
-    const out1 = document.getElementById('local');
-    const out2 = document.getElementById('sesion');
-    const out3 = document.getElementById('galletas');
+    // ======================
+    // Referencias a los elementos del DOM
+    // ======================
+    const input = document.getElementById('texto'); // Input de texto
+    const out1 = document.getElementById('local'); // Div para localStorage
+    const out2 = document.getElementById('sesion'); // Div para sessionStorage
+    const out3 = document.getElementById('galletas'); // Div para cookies
 
+    // ======================
+    // Mostrar información guardada al cargar la página
+    // ======================
+    // Si no hay datos, mostramos "vacio"
     out1.textContent = localStorage.getItem('info') ?? 'vacio';
     out2.textContent = sessionStorage.getItem('info') ?? 'vacio';
     out3.textContent = getCookie('info') ?? 'vacio';
 
+    // ======================
+    // Evento para guardar en localStorage
+    // ======================
     document.getElementById('boton').addEventListener('click', () => {
-      const texto = input.value;
-      localStorage.setItem('info', texto);
-      out1.textContent = texto;
+      const texto = input.value; // Tomamos el valor del input
+      localStorage.setItem('info', texto); // Guardamos en localStorage
+      out1.textContent = texto; // Mostramos en pantalla
     });
 
+    // ======================
+    // Evento para guardar en sessionStorage
+    // ======================
     document.getElementById('boton2').addEventListener('click', () => {
-      const texto = input.value;
-      sessionStorage.setItem('info', texto);
-      out2.textContent = texto;
+      const texto = input.value; // Tomamos el valor del input
+      sessionStorage.setItem('info', texto); // Guardamos en sessionStorage
+      out2.textContent = texto; // Mostramos en pantalla
     });
 
+    // ======================
+    // Evento para guardar en cookies
+    // ======================
     document.getElementById('boton3').addEventListener('click', () => {
-      const texto = input.value;
+      const texto = input.value; // Tomamos el valor del input
+      // Creamos una cookie con nombre "info", codificando el valor
+      // Establecemos path=/ para que sea accesible en toda la web
+      // y expiración el 31 de diciembre de 2025
       document.cookie = `info=${encodeURIComponent(texto)}; path=/; expires=31 Dec 2025 23:59:59 GMT`;
-      out3.textContent = texto;
+
+      out3.textContent = texto; // Mostramos en pantalla
     });
+
   </script>
 </body>
+
 </html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperaturas</title>
+</head>
+
+<body>
+    <h1>Consultar temperatura</h1>
+    <input type="text" id="location" placeholder="Escribe la ciudad">
+    <button id="btn">Obtener temperatura</button>
+    <div id="output"></div>
+
+    <script>
+        // ======================
+        // Función asíncrona usando async/await
+        // ======================
+        // Obtiene los datos del clima en formato JSON para la ubicación pasada
+        async function getWeatherAsync(location) {
+            // Endpoint JSON de wttr.in para la ciudad especificada
+            const url = `https://wttr.in/${location}?format=j1`;
+
+            // Llamada a la API con fetch y espera la respuesta
+            const response = await fetch(url);
+
+            // Convierte la respuesta a JSON y la devuelve
+            const data = await response.json();
+            return data;
+        }
+
+        // ======================
+        // Función usando promesas con .then()
+        // ======================
+        // Alternativa a async/await usando promesas
+        function getWeatherThen(location) {
+            const url = `https://wttr.in/${location}?format=j1`;
+            return fetch(url)
+                .then(res => res.json()) // Convierte la respuesta a JSON
+                .then(data => data);     // Devuelve los datos
+        }
+
+        // ======================
+        // Evento click del botón
+        // ======================
+        document.getElementById('btn').addEventListener('click', async () => {
+
+            // Obtenemos la ubicación escrita por el usuario y eliminamos espacios
+            const location = document.getElementById('location').value.trim();
+
+            // Referencia al div donde se mostrará la información
+            const output = document.getElementById('output');
+
+            // Limpiamos el div antes de mostrar resultados nuevos
+            output.innerHTML = '';
+
+            // Validación: si no escribió nada, mostramos mensaje de error
+            if (!location) {
+                output.innerHTML = 'Por favor escribe una ubicación.';
+                return;
+            }
+
+            try {
+                // Llamamos a la función asíncrona para obtener datos del clima
+                const weatherData = await getWeatherAsync(location);
+
+                // El objeto JSON contiene un array 'weather' con varios días
+                const days = weatherData.weather; // Hoy, mañana y pasado
+                const daysText = ["Hoy", "Mañana", "Pasado"]; // Títulos para cada día
+
+                // Recorremos cada día y mostramos la temperatura mínima y máxima
+                days.forEach((day, index) => {
+                    output.innerHTML += `
+                <h2>${daysText[index]}</h2>
+                <p>Temperatura mínima: ${day.mintempC}°C</p>
+                <p>Temperatura máxima: ${day.maxtempC}°C</p>
+            `;
+                });
+
+                // ======================
+                // Ejemplo opcional usando .then()
+                // ======================
+                // getWeatherThen(location).then(data => console.log(data));
+
+            } catch (error) {
+                // Si ocurre un error (por ejemplo ciudad no válida), mostramos mensaje
+                output.innerHTML = 'No se pudo obtener la información. Revisa la ciudad.';
+                console.error(error);
+            }
+        });
+
+    </script>
+</body>
+
+</html>

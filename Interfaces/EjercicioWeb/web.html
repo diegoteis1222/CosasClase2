@@ -48,7 +48,7 @@
 
     <main class="container">
         <h1>Calculadora de Mierda</h1>
-        
+
         <input type"number" id="numero1" placeholder="Ingrese un numero">
         <input type="number" id="numero2" placeholder="Ingrese otro numero">
 
@@ -59,14 +59,27 @@
     </main>
 
     <script>
-        document.getElementById('btnCalcular').addEventListener('click', function() {
+        // Seleccionamos el botón por su ID y le añadimos un listener de evento 'click'
+        document.getElementById('btnCalcular').addEventListener('click', function () {
+
+            // Obtenemos el valor del primer input y lo convertimos a número decimal
             const num1 = parseFloat(document.getElementById('numero1').value);
+
+            // Obtenemos el valor del segundo input y lo convertimos a número decimal
             const num2 = parseFloat(document.getElementById('numero2').value);
+
+            // Validamos que ambos valores sean números válidos
             if (isNaN(num1) || isNaN(num2)) {
+                // Si alguno no es número, mostramos un mensaje de error en el div 'resultado'
                 document.getElementById('resultado').textContent = 'Por favor, ingrese números válidos.';
-                return;
+                return; // Salimos de la función para que no se ejecute el cálculo
             }
+
+            // Calculamos la suma de los dos números
             const suma = num1 + num2;
+
+            // Mostramos el resultado en el div 'resultado'
+            // Concatenamos la suma con un texto extra "AAAAAAAAAAAAAAAH"
             document.getElementById('resultado').textContent = 'Resultado: ' + suma + " AAAAAAAAAAAAAAAAH";
         });
     </script>
