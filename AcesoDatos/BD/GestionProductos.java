@@ -1,4 +1,3 @@
-
 import java.awt.*;
 import java.io.*;
 import java.sql.*;
@@ -16,25 +15,24 @@ public class GestionProductos extends JFrame {
     public GestionProductos(Connection conn) {
         this.connection = conn;
 
-        // Configuración de la ventana
         setTitle("Gestión de Productos - Northwind (Modo CSV)");
         setSize(950, 600);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new BorderLayout());
 
-        // --- 1. Panel de Botones ---
+        // Botones y panel
         JPanel topPanel = new JPanel();
         JButton btnMostrar = new JButton("Mostrar Productos");
         JButton btnCargar = new JButton("Importar CSV");
         JButton btnExportar = new JButton("Exportar a CSV");
 
+        //adds
         topPanel.add(btnMostrar);
         topPanel.add(btnCargar);
         topPanel.add(btnExportar);
         add(topPanel, BorderLayout.NORTH);
 
-        //Tabla Scrollable
         tableModel = new DefaultTableModel();
         table = new JTable(tableModel);
         JScrollPane scrollPane = new JScrollPane(table);
@@ -51,7 +49,8 @@ public class GestionProductos extends JFrame {
 
         String sql = "SELECT * FROM products ORDER BY ProductID DESC";
 
-        try (Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery(sql)) {
+        try (Statement stmt = connection.createStatement(); 
+             ResultSet rs = stmt.executeQuery(sql)) {
 
             ResultSetMetaData metaData = rs.getMetaData();
             int columnCount = metaData.getColumnCount();
@@ -78,7 +77,6 @@ public class GestionProductos extends JFrame {
     private void cargarDatosCSV() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Seleccionar archivo CSV");
-        // CAMBIO: Filtro para .csv
         fileChooser.setFileFilter(new FileNameExtensionFilter("Archivos CSV (*.csv)", "csv"));
 
         int seleccion = fileChooser.showOpenDialog(this);
@@ -89,7 +87,8 @@ public class GestionProductos extends JFrame {
 
             String sql = "INSERT INTO products (ProductName, SupplierID, CategoryID, QuantityPerUnit, UnitPrice, UnitsInStock, UnitsOnOrder, ReorderLevel, Discontinued) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-            try (BufferedReader br = new BufferedReader(new FileReader(fichero)); PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            try (BufferedReader br = new BufferedReader(new FileReader(fichero)); 
+                 PreparedStatement pstmt = connection.prepareStatement(sql)) {
 
                 String linea;
                 boolean primeraLinea = true;
@@ -101,7 +100,6 @@ public class GestionProductos extends JFrame {
 
                     if (primeraLinea) {
                         primeraLinea = false;
-
                         continue;
                     }
 
@@ -139,7 +137,6 @@ public class GestionProductos extends JFrame {
         }
     }
 
-    //EXPORTAR A CSV
     private void exportarDatosCSV() {
         JFileChooser fileChooser = new JFileChooser();
         fileChooser.setDialogTitle("Guardar como CSV");
@@ -149,14 +146,15 @@ public class GestionProductos extends JFrame {
 
         if (seleccion == JFileChooser.APPROVE_OPTION) {
             File fichero = fileChooser.getSelectedFile();
-            // Asegurar extensión .csv
             if (!fichero.getName().toLowerCase().endsWith(".csv")) {
                 fichero = new File(fichero.getParentFile(), fichero.getName() + ".csv");
             }
 
             int registrosExportados = 0;
 
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(fichero)); Statement stmt = connection.createStatement(); ResultSet rs = stmt.executeQuery("SELECT * FROM products")) {
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(fichero)); 
+                 Statement stmt = connection.createStatement(); 
+                 ResultSet rs = stmt.executeQuery("SELECT * FROM products")) {
 
                 int colCount = rs.getMetaData().getColumnCount();
 

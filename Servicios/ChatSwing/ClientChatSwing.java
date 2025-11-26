@@ -54,7 +54,7 @@ public class ClientChatSwing extends JFrame {
 
     private void connectToServer() {
         try {
-            socket = new Socket("localhost", 4444);
+            socket = new Socket("10.101.3.36", 9000);
             out = new PrintWriter(socket.getOutputStream(), true);
             in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
