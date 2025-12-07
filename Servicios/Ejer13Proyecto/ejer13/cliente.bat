@@ -1,0 +1,1 @@
+java --add-opens=java.base/java.util=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED -cp "lib/db4o-all-8.0.249.jar;src" ClienteBD

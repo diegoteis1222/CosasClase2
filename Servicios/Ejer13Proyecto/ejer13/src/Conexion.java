@@ -1,5 +1,4 @@
-
-import com.db4o.*;
+import com.db4o.*; 
 
 public class Conexion {
 
@@ -12,5 +11,9 @@ public class Conexion {
 
     public static ObjectContainer getDBConexion() {
         return db;
+    }
+
+    static void cerrarConexion() {
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 } // Fin Conexion
