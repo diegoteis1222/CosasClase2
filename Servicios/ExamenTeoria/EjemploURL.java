@@ -1,9 +1,13 @@
+
 import java.net.*;
 
-public class EjemplolURL {
+public class EjemploURL {
+
     @SuppressWarnings("deprecation")
     public static void main(String[] args) {
         URL url;
+
+        //Los CONSTRUCTORES son el new URL, se puede pasar la url por partes o entera
         try {
             System.out.println("Constructor simple para una URL:");
             url = new URL("http://store.steampowered.com/");
@@ -26,20 +30,14 @@ public class EjemplolURL {
             url = new URL(urlBase, "/dwarves/");
             Visualizar(url);
 
-            System.out.println("Otro constructor simple para una URL:");
-            url = new URL("http://localhost/PFC/gest/cli_gestion.php?S=3");
-            Visualizar(url);
-
-            System.out.println("Constructor para protocolo + URL + puerto +directorio:");
-            url = new URL("https://fichajerapidocebem.web.app");
-            Visualizar(url);
-
         } catch (MalformedURLException e) {
             System.out.println(e);
         }
     }// main
 
     private static void Visualizar(URL url) {
+
+        // Los METODOS son todos los siguientes
         System.out.println("\tURL completa: " + url.toString());
         System.out.println("\tgetProtocol(): " + url.getProtocol());
         System.out.println("\tgetHost (): " + url.getHost());
@@ -49,7 +47,6 @@ public class EjemplolURL {
         System.out.println("\tgetPath () : " + url.getPath());
         System.out.println("\tgetAuthority(): " + url.getAuthority());
         System.out.println("\tgetQuery(): " + url.getQuery());
-        System.out.println("==");
+        System.out.println("==============================================");
     }
 }
-// Ejemplo1URL
