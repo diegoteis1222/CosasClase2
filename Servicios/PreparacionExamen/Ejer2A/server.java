@@ -5,12 +5,7 @@ import java.net.DatagramSocket;
 
 public class server {
 
-    private static final int primitiva1 = 6;
-    private static final int primitiva2 = 7;
-    private static final int primitiva3 = 8;
-    private static final int primitiva4 = 9;
-    private static final int primitiva5 = 10;
-    private static final int primitiva6 = 11;
+    private static final int[] primitiva = {6, 7, 8, 9, 10, 11};
 
     public static void main(String[] args) throws IOException {
 
@@ -56,12 +51,16 @@ public class server {
         StringBuilder devolver = new StringBuilder("");
 
         for (String numero : numeros) {
-            int num = Integer.parseInt(numero.trim());
 
-            // que asco da esto
-            if (num == primitiva1 || num == primitiva2 || num == primitiva3 || num == primitiva4 || num == primitiva5 || num == primitiva6) {
-                devolver.append(num).append(" ");
+            for (int i = 0; i < primitiva.length; i++) {
+
+                int num = Integer.parseInt(numero.trim());
+
+                if (num == primitiva[i]) {
+                    devolver.append(num).append(" ");
+                }
             }
+
         }
         return devolver.toString();
     }
@@ -83,7 +82,7 @@ public class server {
         } else if (cantidadAciertos >= 3) {
             resultado += "Acertaste 3 numeros";
         } else {
-            resultado += "No acertaste 3 numeros.";
+            resultado += "No acertaste almenos 3 numeros.";
         }
 
         return resultado;
