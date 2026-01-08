@@ -1,0 +1,10 @@
+ El volumen de la unidad C no tiene etiqueta.
+ El n£mero de serie del volumen es: 7665-3137
+
+ Directorio de C:\Users\Diego\Documents\DAM\Servicios\pro1\miDire
+
+08/01/2026  14:52    <DIR>          .
+08/01/2026  14:44    <DIR>          ..
+08/01/2026  14:52                 0 listado.txt
+               1 archivos              0 bytes
+               2 dirs  53.068.525.568 bytes libres
