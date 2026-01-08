@@ -1,0 +1,3 @@
+iphone, 10000
+tele, 1
+paco, 2

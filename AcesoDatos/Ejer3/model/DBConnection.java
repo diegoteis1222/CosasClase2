@@ -9,7 +9,7 @@ import java.util.Properties;
 
 public class DBConnection {
 
-    private static final String PROPS_FILE = "C:/Users/Diego/Documents/DAM/AcesoDatos/Northwind ejercicio/resources/db.properties";
+    private static final String PROPS_FILE = "db.properties";
     private static String url;
     private static String user;
     private static String password;
@@ -17,7 +17,10 @@ public class DBConnection {
 
     static {
     Properties props = new Properties();
-    try (InputStream in = new java.io.FileInputStream(PROPS_FILE)) {  // <-- FileInputStream
+    try (InputStream in = DBConnection.class.getClassLoader().getResourceAsStream(PROPS_FILE)) {
+        if (in == null) {
+            throw new IOException("No se encontró el archivo " + PROPS_FILE + " en el classpath");
+        }
         props.load(in);
         url = props.getProperty("jdbc.url");
         user = props.getProperty("jdbc.user");
@@ -41,7 +44,6 @@ public class DBConnection {
         try {
             return DriverManager.getConnection(url, user, password);
         } catch (SQLException e) {
-            // Lanzamos para que la capa superior lo gestione y muestre mensaje usuario-amigable
             throw e;
         }
     }

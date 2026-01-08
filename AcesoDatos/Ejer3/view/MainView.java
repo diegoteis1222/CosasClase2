@@ -9,7 +9,7 @@ import model.Product;
 public class MainView extends JFrame {
     private JTable table;
     private DefaultTableModel tableModel;
-    private JButton btnNuevo, btnEditar, btnEliminar, btnRefresh, btnBuscar;
+    private JButton btnNuevo, btnEditar, btnEliminar, btnRefresh, btnBuscar, btnPrecioMayor50;
     private JTextField txtBuscar;
 
     public MainView() {
@@ -29,6 +29,7 @@ public class MainView extends JFrame {
         txtBuscar = new JTextField(30);
         btnBuscar = new JButton("Buscar");
         btnRefresh = new JButton("Actualizar");
+        btnPrecioMayor50 = new JButton("Precio > 50");
         btnNuevo = new JButton("Nuevo");
         btnEditar = new JButton("Editar");
         btnEliminar = new JButton("Eliminar");
@@ -37,6 +38,7 @@ public class MainView extends JFrame {
         top.add(txtBuscar);
         top.add(btnBuscar);
         top.add(btnRefresh);
+        top.add(btnPrecioMayor50);
         top.add(btnNuevo);
         top.add(btnEditar);
         top.add(btnEliminar);
@@ -66,10 +68,10 @@ public class MainView extends JFrame {
 
     public String getSearchText() { return txtBuscar.getText().trim(); }
 
-    // Getters para controller
     public JButton getBtnNuevo() { return btnNuevo; }
     public JButton getBtnEditar() { return btnEditar; }
     public JButton getBtnEliminar() { return btnEliminar; }
     public JButton getBtnRefresh() { return btnRefresh; }
     public JButton getBtnBuscar() { return btnBuscar; }
+    public JButton getBtnPrecioMayor50() { return btnPrecioMayor50; }
 }

@@ -40,6 +40,22 @@ public class ProductDAO {
         return list;
     }
 
+    public List<Product> findByPriceGreaterThan(double minPrice) throws SQLException {
+        String sql = "SELECT ProductID, ProductName, QuantityPerUnit, UnitPrice, UnitsInStock, SupplierID, CategoryID " +
+                     "FROM Products WHERE UnitPrice > ? ORDER BY ProductID";
+        List<Product> list = new ArrayList<>();
+        try (Connection c = DBConnection.getConnection();
+             PreparedStatement ps = c.prepareStatement(sql)) {
+            ps.setDouble(1, minPrice);
+            try (ResultSet rs = ps.executeQuery()) {
+                while (rs.next()) {
+                    list.add(mapRow(rs));
+                }
+            }
+        }
+        return list;
+    }
+
     public Product findById(int id) throws SQLException {
         String sql = "SELECT ProductID, ProductName, QuantityPerUnit, UnitPrice, UnitsInStock, SupplierID, CategoryID " +
                      "FROM Products WHERE ProductID = ?";

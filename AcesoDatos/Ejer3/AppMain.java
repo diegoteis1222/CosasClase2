@@ -12,5 +12,8 @@ public class AppMain {
             new ProductController(dao, view);
             view.setVisible(true);
         });
+
+        // para ejecutarlo: java -cp "lib\mysql-connector-j-8.4.0.jar;bin;resources" AppMain
+        // putos importes
     }
 }

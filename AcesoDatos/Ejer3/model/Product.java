@@ -24,7 +24,6 @@ public class Product {
         this.unitsInStock = unitsInStock;
     }
 
-    // Getters y setters
     public Integer getProductID() { return productID; }
     public void setProductID(Integer productID) { this.productID = productID; }
 

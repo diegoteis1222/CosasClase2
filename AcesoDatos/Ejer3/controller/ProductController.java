@@ -2,14 +2,13 @@ package controller;
 
 
 import dao.ProductDAO;
-import model.Product;
-import view.MainView;
-import view.ProductFormDialog;
-
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.sql.SQLException;
 import java.util.List;
+import javax.swing.*;
+import model.Product;
+import view.MainView;
+import view.ProductFormDialog;
 
 public class ProductController {
     private ProductDAO dao;
@@ -25,6 +24,7 @@ public class ProductController {
     private void initController() {
         view.getBtnRefresh().addActionListener(e -> refreshTable());
         view.getBtnBuscar().addActionListener(e -> searchByName());
+        view.getBtnPrecioMayor50().addActionListener(e -> filterByPriceGreaterThan50());
         view.getBtnNuevo().addActionListener(e -> newProduct());
         view.getBtnEditar().addActionListener(e -> editProduct());
         view.getBtnEliminar().addActionListener(e -> deleteProduct());
@@ -33,9 +33,11 @@ public class ProductController {
     private void refreshTable() {
         try {
             List<Product> list = dao.findAll();
+            System.out.println("Productos cargados: " + list.size());
             view.setTableData(list);
         } catch (SQLException e) {
             showError("Error cargando productos: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -48,6 +50,15 @@ public class ProductController {
             view.setTableData(list);
         } catch (SQLException e) {
             showError("Error en búsqueda: " + e.getMessage());
+        }
+    }
+
+    private void filterByPriceGreaterThan50() {
+        try {
+            List<Product> list = dao.findByPriceGreaterThan(50.0);
+            view.setTableData(list);
+        } catch (SQLException e) {
+            showError("Error filtrando por precio: " + e.getMessage());
         }
     }
 
@@ -117,7 +128,6 @@ public class ProductController {
                 showError("No se eliminó el producto. Puede que no exista o haya restricciones.");
             }
         } catch (SQLException ex) {
-            // Mensaje amigable si hay FK u otras restricciones
             showError("Error al eliminar producto. Es posible que existan restricciones (FK). Detalle: " + ex.getMessage());
         }
     }

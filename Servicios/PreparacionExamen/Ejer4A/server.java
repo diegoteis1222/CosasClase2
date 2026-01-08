@@ -38,6 +38,8 @@ public class server {
         double mediaSegundo = sumaSegundo / contadorSegundo;
         double mediaTotal = (sumaPrimero + sumaSegundo) / (contadorPrimero + contadorSegundo);
 
+        // hay que hacer filtro para las notas
+
         String resultado = "media 1DAM: " + mediaPrimero + ", media 2DAM: " + mediaSegundo + ", media total: " + mediaTotal;
 
         ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
