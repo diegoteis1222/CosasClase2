@@ -1,4 +1,5 @@
 
+import java.util.Arrays;
 import java.util.HashMap;
 
 public class biblioteca {
@@ -66,4 +67,24 @@ public class biblioteca {
 
         return sumaCuadrados / datos.length;
     }
+
+    public static double obtenerDesviacionEstandar(int[] datos) {
+        return Math.sqrt(obtenerVarianza(datos));
+    }
+
+    public static double obtenerMediaStreams(int[] datos) {
+        return Arrays.stream(datos)
+                .average()
+                .orElse(0.0);
+    }
+
+    public static double obtenerVarianzaStreams(int[] datos) {
+        double media = obtenerMedia(datos);
+
+        return Arrays.stream(datos)
+                .mapToDouble(x -> Math.pow(x - media, 2))
+                .average()
+                .orElse(0.0);
+    }
+
 }
