@@ -7,22 +7,42 @@ public class LanzadorMultiplePropio {
     // como necesitas para recorrer un hasmap de todas las letras minusculas
     // generando 5 ficheros de salido
 
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, Exception {
 
-        lanzarProcesoMultiple("fichero.txt", "a", "resultadoA.txt");
-        lanzarProcesoMultiple("fichero.txt", "e", "resultadoE.txt");
-        lanzarProcesoMultiple("fichero.txt", "i", "resultadoI.txt");
-        lanzarProcesoMultiple("fichero.txt", "o", "resultadoO.txt");
-        lanzarProcesoMultiple("fichero.txt", "u", "resultadoU.txt");
+        if (args.length == 3) {
+            ProcesadorFichero.hacerRecuentoVocal(args[0], args[1], args[2]);
+        } else {
+            lanzarProcesoMultiple("fichero.txt", "a", "resultadoA.txt");
+            lanzarProcesoMultiple("fichero.txt", "e", "resultadoE.txt");
+            lanzarProcesoMultiple("fichero.txt", "i", "resultadoI.txt");
+            lanzarProcesoMultiple("fichero.txt", "o", "resultadoO.txt");
+            lanzarProcesoMultiple("fichero.txt", "u", "resultadoU.txt");
+
+            
+        }
     }
 
     public static void lanzarProcesoMultiple(String ficheroEntrada, String letraContar, String ficheroResultado)
-            throws FileNotFoundException, IOException {
+            throws IOException {
 
-        String fichEntra = ficheroEntrada;
-        String letra = letraContar;
-        String fichResultado = ficheroResultado;
+        String classpath = System.getProperty("java.class.path");
+        
+        ProcessBuilder pb = new ProcessBuilder(
+                "java",
+                "-cp",
+                classpath,
+                "LanzadorMultiplePropio",
+                ficheroEntrada,
+                letraContar,
+                ficheroResultado);
 
-        ProcesadorFichero.hacerRecuentoVocal(fichEntra, letra, fichResultado);
+        pb.inheritIO();
+        Process proceso = pb.start();
+
+        try {
+            proceso.waitFor();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
     }
 }
