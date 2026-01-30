@@ -1,5 +1,6 @@
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.Scanner;
 
 public class LanzadorMultiplePropio {
 
@@ -18,7 +19,7 @@ public class LanzadorMultiplePropio {
             lanzarProcesoMultiple("fichero.txt", "o", "resultadoO.txt");
             lanzarProcesoMultiple("fichero.txt", "u", "resultadoU.txt");
 
-            
+            contarTotalVocales();
         }
     }
 
@@ -44,5 +45,31 @@ public class LanzadorMultiplePropio {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+    }
+
+    public static void contarTotalVocales() throws IOException {
+        String[] archivos = {"resultadoA.txt", "resultadoE.txt", "resultadoI.txt", "resultadoO.txt", "resultadoU.txt"};
+        int totalVocales = 0;
+        
+        System.out.println("\n=== RESUMEN DE CONTEO DE VOCALES ===\n");
+        
+        for (String archivo : archivos) {
+            Scanner scanner = new Scanner(new java.io.File(archivo));
+            
+            if (scanner.hasNextLine()) {
+                String linea = scanner.nextLine();
+                String[] partes = linea.split(":");
+                if (partes.length == 2) {
+                    int count = Integer.parseInt(partes[1].trim());
+                    totalVocales += count;
+                    System.out.println(linea);
+                }
+            }
+            
+            scanner.close();
+        }
+
+        System.out.println("\nTotal de vocales: " + totalVocales);
     }
 }
